@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.coverage
+htmlcov/
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Local extraction staging (deleted after move; ignore in case it lingers)
+_staging/
+
+# Env files
+.env
+.env.*
+!.env.example

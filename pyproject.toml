@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crowtax-engine"
+version = "0.1.0"
+description = "Privacy-first crypto tax engine: per-wallet basis matching, wash-sale detection, Form 8949 / Schedule D / Schedule 1 output. Self-contained library, no SaaS dependencies."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [{name = "Crowtax contributors"}]
+keywords = ["tax", "crypto", "form-8949", "schedule-d", "fifo", "lifo", "hifo", "wash-sale", "rev-proc-2024-28"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = [
+    "psycopg2-binary>=2.9",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+]
+
+[project.urls]
+Homepage = "https://tax.commputer.xyz"
+Source = "https://github.com/TBD/crowtax-engine"
+
+[tool.hatch.build.targets.wheel]
+packages = ["crowtax_engine"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/crowtax_engine", "/tests", "/README.md", "/LICENSE", "/CHANGELOG.md", "/pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = [
+    "E501",  # line length
+    "E741",  # ambiguous variable name (legacy `l` = "lot" in engine SQL helpers)
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests use intent-named variables (e.g. `loss_lot`) for documentation even
+# when only the side-effect of the make_lot() call matters.
+"tests/*" = ["F841"]
