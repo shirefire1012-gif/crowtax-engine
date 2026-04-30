@@ -202,6 +202,22 @@ def promote_confirmed(conn, batch_size: int = PROMOTE_BATCH_SIZE):
                     cost_basis = quantity * price_usd + fee_usd
                     cost_per_unit = (cost_basis / quantity) if quantity > 0 else Decimal(0)
                     acq_type = _parse_acquisition_type(raw)
+                    # Roadmap 2.4 / Notice 2023-27: NFT collectibles must
+                    # land on tax_lots with asset_class='nft_collectible'
+                    # so the filing-package collectibles split can route
+                    # the eventual disposal onto the 28%-rate Form 8949.
+                    # Validated against the column CHECK constraint
+                    # (migration 009) — anything else falls back to the
+                    # default 'fungible'.
+                    asset_class = (raw.get("asset_class") or "fungible").lower()
+                    if asset_class not in (
+                        "fungible", "nft_collectible", "nft_non_collectible"
+                    ):
+                        log.warning(
+                            "promote_confirmed: unknown asset_class %r — "
+                            "defaulting to 'fungible'", asset_class,
+                        )
+                        asset_class = "fungible"
 
                     # Dedup check
                     if source_tx_id:
@@ -220,13 +236,13 @@ def promote_confirmed(conn, batch_size: int = PROMOTE_BATCH_SIZE):
                              acquired_at, quantity, cost_basis_usd,
                              cost_basis_per_unit, remaining_quantity,
                              acquisition_type, fee_usd, source,
-                             source_tx_id, raw_transaction_id)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                             source_tx_id, raw_transaction_id, asset_class)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """, (account_id, wallet, chain, symbol, ts, quantity,
                           cost_basis, cost_per_unit, quantity,
                           acq_type, fee_usd, raw.get("source", "csv"),
                           (source_tx_id + ":lot") if source_tx_id else None,
-                          raw_id))
+                          raw_id, asset_class))
 
                 if tx_type in SELL_TYPES or tx_type == "swap":
                     # Create a disposal for the sold/sent asset
