@@ -1,0 +1,63 @@
+# New Jersey 2026 — Selective conformity (state-defined starting point).
+# No Schedule D analog — all capital gains report on Schedule NJ-DOP
+# (Net Gains from Disposition of Property). STCG/LTCG indistinguishable;
+# both taxed at ordinary NJ rates 1.4%-10.75%. No loss carryforward.
+# Crypto guidance: TAM-2015-1(R), revised 2022-03-21.
+# [2025 — pending 2026 update]
+jurisdiction: nj
+tax_year: 2026
+data_year_actual: 2025
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.nj.gov/treasury/taxation"
+  - "https://www.nj.gov/treasury/taxation/pdf/pubs/tams/tam-2015-1r.pdf"
+last_verified: "2026-05-04"
+
+conformity_type: selective
+conformity_date: null
+starting_point: state_defined
+conformity_starting_point: state_defined
+no_income_tax: false
+has_ltcg_preference: false
+capital_gains_treatment: ordinary
+capital_gains_exclusion_pct: null
+capital_gains_rate: null
+capital_gains_credit_pct: null
+capital_gains_subtraction_pct: null
+capital_gains_excise: null
+
+brackets:
+  - { filing_status: single, threshold: 0,       rate: 0.014 }
+  - { filing_status: single, threshold: 20000,   rate: 0.0175 }
+  - { filing_status: single, threshold: 35000,   rate: 0.035 }
+  - { filing_status: single, threshold: 40000,   rate: 0.0553 }
+  - { filing_status: single, threshold: 75000,   rate: 0.0637 }
+  - { filing_status: single, threshold: 500000,  rate: 0.0897 }
+  - { filing_status: single, threshold: 1000000, rate: 0.1075 }
+  - { filing_status: mfj,    threshold: 0,       rate: 0.014 }
+  - { filing_status: mfj,    threshold: 20000,   rate: 0.0175 }
+  - { filing_status: mfj,    threshold: 50000,   rate: 0.0245 }
+  - { filing_status: mfj,    threshold: 70000,   rate: 0.035 }
+  - { filing_status: mfj,    threshold: 80000,   rate: 0.0553 }
+  - { filing_status: mfj,    threshold: 150000,  rate: 0.0637 }
+  - { filing_status: mfj,    threshold: 500000,  rate: 0.0897 }
+  - { filing_status: mfj,    threshold: 1000000, rate: 0.1075 }
+  - { filing_status: mfs,    threshold: 0,       rate: 0.014 }
+  - { filing_status: mfs,    threshold: 20000,   rate: 0.0175 }
+  - { filing_status: mfs,    threshold: 35000,   rate: 0.035 }
+  - { filing_status: mfs,    threshold: 40000,   rate: 0.0553 }
+  - { filing_status: mfs,    threshold: 75000,   rate: 0.0637 }
+  - { filing_status: mfs,    threshold: 500000,  rate: 0.0897 }
+  - { filing_status: mfs,    threshold: 1000000, rate: 0.1075 }
+  - { filing_status: hoh,    threshold: 0,       rate: 0.014 }
+  - { filing_status: hoh,    threshold: 20000,   rate: 0.0175 }
+  - { filing_status: hoh,    threshold: 50000,   rate: 0.0245 }
+  - { filing_status: hoh,    threshold: 70000,   rate: 0.035 }
+  - { filing_status: hoh,    threshold: 80000,   rate: 0.0553 }
+  - { filing_status: hoh,    threshold: 150000,  rate: 0.0637 }
+  - { filing_status: hoh,    threshold: 500000,  rate: 0.0897 }
+  - { filing_status: hoh,    threshold: 1000000, rate: 0.1075 }
+
+loss_carryforward: false
+has_schedule_d: false
+is_excise_tax: false

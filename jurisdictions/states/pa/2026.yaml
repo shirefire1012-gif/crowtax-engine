@@ -1,0 +1,31 @@
+# Pennsylvania 2026 — Selective conformity, state-defined gross income
+# per class (72 P.S. §7303). Crypto = Class C income (capital gains).
+# Flat 3.07%. No LTCG preference; no STCG/LTCG distinction.
+# No loss carryforward — losses can only offset same-year same-class gains.
+# PA DOR Revenue Ruling 2024-001 (informal): crypto = intangible property.
+jurisdiction: pa
+tax_year: 2026
+data_year_actual: 2026
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.revenue.pa.gov"
+last_verified: "2026-05-04"
+
+conformity_type: selective
+conformity_date: null
+starting_point: state_defined
+conformity_starting_point: state_defined
+no_income_tax: false
+has_ltcg_preference: false
+capital_gains_treatment: ordinary
+capital_gains_exclusion_pct: null
+capital_gains_rate: null
+capital_gains_credit_pct: null
+capital_gains_subtraction_pct: null
+capital_gains_excise: null
+
+flat_rate: 0.0307
+
+loss_carryforward: false
+has_schedule_d: true
+is_excise_tax: false

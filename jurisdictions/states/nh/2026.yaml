@@ -1,0 +1,26 @@
+# New Hampshire 2026 — no individual income tax.
+# Interest & Dividends (I&D) tax repealed effective Jan 1 2025 (HB 2, 2023).
+# Crypto capital gains were never within I&D scope.
+jurisdiction: nh
+tax_year: 2026
+data_year_actual: 2026
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.revenue.nh.gov"
+last_verified: "2026-05-04"
+
+conformity_type: none
+conformity_date: null
+starting_point: none
+no_income_tax: true
+has_ltcg_preference: false
+capital_gains_treatment: none
+capital_gains_exclusion_pct: null
+capital_gains_rate: null
+capital_gains_credit_pct: null
+capital_gains_subtraction_pct: null
+capital_gains_excise: null
+
+loss_carryforward: false
+has_schedule_d: false
+is_excise_tax: false

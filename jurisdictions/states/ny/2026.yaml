@@ -1,0 +1,66 @@
+# New York State 2026 — NY DTF. Rolling federal conformity. No LTCG
+# preference — gains taxed as ordinary income at NY rates 4%-10.9%.
+# NYC and Yonkers handled as separate city overlays.
+# Brackets reflect TY 2025 published; NY DTF 2026 schedule pending.
+# [2025 — pending 2026 update]
+jurisdiction: ny
+tax_year: 2026
+data_year_actual: 2025
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.tax.ny.gov"
+last_verified: "2026-05-04"
+
+conformity_type: rolling
+conformity_date: null
+starting_point: federal_agi
+no_income_tax: false
+has_ltcg_preference: false
+capital_gains_treatment: ordinary
+capital_gains_exclusion_pct: null
+capital_gains_rate: null
+capital_gains_credit_pct: null
+capital_gains_subtraction_pct: null
+capital_gains_excise: null
+
+brackets:
+  - { filing_status: single, threshold: 0,        rate: 0.04 }
+  - { filing_status: single, threshold: 8500,     rate: 0.045 }
+  - { filing_status: single, threshold: 11700,    rate: 0.0525 }
+  - { filing_status: single, threshold: 13900,    rate: 0.0585 }
+  - { filing_status: single, threshold: 80650,    rate: 0.0625 }
+  - { filing_status: single, threshold: 215400,   rate: 0.0685 }
+  - { filing_status: single, threshold: 1077550,  rate: 0.0965 }
+  - { filing_status: single, threshold: 5000000,  rate: 0.103 }
+  - { filing_status: single, threshold: 25000000, rate: 0.109 }
+  - { filing_status: mfj,    threshold: 0,        rate: 0.04 }
+  - { filing_status: mfj,    threshold: 17150,    rate: 0.045 }
+  - { filing_status: mfj,    threshold: 23600,    rate: 0.0525 }
+  - { filing_status: mfj,    threshold: 27900,    rate: 0.0585 }
+  - { filing_status: mfj,    threshold: 161550,   rate: 0.0625 }
+  - { filing_status: mfj,    threshold: 323200,   rate: 0.0685 }
+  - { filing_status: mfj,    threshold: 2155350,  rate: 0.0965 }
+  - { filing_status: mfj,    threshold: 5000000,  rate: 0.103 }
+  - { filing_status: mfj,    threshold: 25000000, rate: 0.109 }
+  - { filing_status: mfs,    threshold: 0,        rate: 0.04 }
+  - { filing_status: mfs,    threshold: 8500,     rate: 0.045 }
+  - { filing_status: mfs,    threshold: 11700,    rate: 0.0525 }
+  - { filing_status: mfs,    threshold: 13900,    rate: 0.0585 }
+  - { filing_status: mfs,    threshold: 80650,    rate: 0.0625 }
+  - { filing_status: mfs,    threshold: 215400,   rate: 0.0685 }
+  - { filing_status: mfs,    threshold: 1077550,  rate: 0.0965 }
+  - { filing_status: mfs,    threshold: 5000000,  rate: 0.103 }
+  - { filing_status: mfs,    threshold: 25000000, rate: 0.109 }
+  - { filing_status: hoh,    threshold: 0,        rate: 0.04 }
+  - { filing_status: hoh,    threshold: 12800,    rate: 0.045 }
+  - { filing_status: hoh,    threshold: 17650,    rate: 0.0525 }
+  - { filing_status: hoh,    threshold: 20900,    rate: 0.0585 }
+  - { filing_status: hoh,    threshold: 107650,   rate: 0.0625 }
+  - { filing_status: hoh,    threshold: 269300,   rate: 0.0685 }
+  - { filing_status: hoh,    threshold: 1616450,  rate: 0.0965 }
+  - { filing_status: hoh,    threshold: 5000000,  rate: 0.103 }
+  - { filing_status: hoh,    threshold: 25000000, rate: 0.109 }
+
+loss_carryforward: true
+has_schedule_d: true
+is_excise_tax: false

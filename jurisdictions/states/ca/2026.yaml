@@ -1,0 +1,76 @@
+# California 2026 — FTB. Static-date conformity to IRC as of Jan 1 2015
+# (Rev. & Tax. Code §17024.5). No LTCG preference; gains taxed as ordinary.
+# 1% Mental Health Services surtax over $1M (Art. 44 Amend.).
+# Brackets reflect TY 2025 published values; CA FTB has not yet released
+# 2026 inflation-indexed thresholds. Tagged data_year_actual: 2025.
+# [2025 — pending 2026 update]
+jurisdiction: ca
+tax_year: 2026
+data_year_actual: 2025
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.ftb.ca.gov"
+  - "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17024.5"
+last_verified: "2026-05-04"
+
+conformity_type: static_date
+conformity_date: "2015-01-01"
+starting_point: federal_agi
+no_income_tax: false
+has_ltcg_preference: false
+capital_gains_treatment: ordinary
+capital_gains_exclusion_pct: null
+capital_gains_rate: null
+capital_gains_credit_pct: null
+capital_gains_subtraction_pct: null
+capital_gains_excise: null
+
+brackets:
+  - { filing_status: single, threshold: 0,       rate: 0.01 }
+  - { filing_status: single, threshold: 10756,   rate: 0.02 }
+  - { filing_status: single, threshold: 25500,   rate: 0.04 }
+  - { filing_status: single, threshold: 40246,   rate: 0.06 }
+  - { filing_status: single, threshold: 55866,   rate: 0.08 }
+  - { filing_status: single, threshold: 70606,   rate: 0.093 }
+  - { filing_status: single, threshold: 360660,  rate: 0.103 }
+  - { filing_status: single, threshold: 432787,  rate: 0.113 }
+  - { filing_status: single, threshold: 721315,  rate: 0.123 }
+  - { filing_status: single, threshold: 1000000, rate: 0.133 }
+  - { filing_status: mfj,    threshold: 0,       rate: 0.01 }
+  - { filing_status: mfj,    threshold: 21512,   rate: 0.02 }
+  - { filing_status: mfj,    threshold: 51000,   rate: 0.04 }
+  - { filing_status: mfj,    threshold: 80492,   rate: 0.06 }
+  - { filing_status: mfj,    threshold: 111732,  rate: 0.08 }
+  - { filing_status: mfj,    threshold: 141212,  rate: 0.093 }
+  - { filing_status: mfj,    threshold: 721318,  rate: 0.103 }
+  - { filing_status: mfj,    threshold: 865574,  rate: 0.113 }
+  - { filing_status: mfj,    threshold: 1442628, rate: 0.123 }
+  - { filing_status: mfj,    threshold: 2000000, rate: 0.133 }
+  - { filing_status: mfs,    threshold: 0,       rate: 0.01 }
+  - { filing_status: mfs,    threshold: 10756,   rate: 0.02 }
+  - { filing_status: mfs,    threshold: 25500,   rate: 0.04 }
+  - { filing_status: mfs,    threshold: 40246,   rate: 0.06 }
+  - { filing_status: mfs,    threshold: 55866,   rate: 0.08 }
+  - { filing_status: mfs,    threshold: 70606,   rate: 0.093 }
+  - { filing_status: mfs,    threshold: 360660,  rate: 0.103 }
+  - { filing_status: mfs,    threshold: 432787,  rate: 0.113 }
+  - { filing_status: mfs,    threshold: 721315,  rate: 0.123 }
+  - { filing_status: mfs,    threshold: 1000000, rate: 0.133 }
+  - { filing_status: hoh,    threshold: 0,       rate: 0.01 }
+  - { filing_status: hoh,    threshold: 21527,   rate: 0.02 }
+  - { filing_status: hoh,    threshold: 51000,   rate: 0.04 }
+  - { filing_status: hoh,    threshold: 65745,   rate: 0.06 }
+  - { filing_status: hoh,    threshold: 81363,   rate: 0.08 }
+  - { filing_status: hoh,    threshold: 96107,   rate: 0.093 }
+  - { filing_status: hoh,    threshold: 490493,  rate: 0.103 }
+  - { filing_status: hoh,    threshold: 588593,  rate: 0.113 }
+  - { filing_status: hoh,    threshold: 980987,  rate: 0.123 }
+  - { filing_status: hoh,    threshold: 1000000, rate: 0.133 }
+
+mental_health_services_surtax: true
+mental_health_services_rate: 0.01
+mental_health_services_threshold: 1000000
+
+loss_carryforward: true
+has_schedule_d: true
+is_excise_tax: false
