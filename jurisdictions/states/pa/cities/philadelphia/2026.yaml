@@ -1,0 +1,43 @@
+# Philadelphia (PA) 2026 — City of Philadelphia Department of Revenue.
+#
+# Philadelphia levies an Earnings Tax (3.75% resident / 3.44% non-
+# resident) on wages and net business profits. It does NOT apply to
+# passive capital gains from securities, including crypto, for
+# individual investors.
+#
+# This YAML exists to PREVENT a future contributor from accidentally
+# applying the earnings tax to investment income — no_cap_gains_tax: true
+# is the explicit signal to compute_jurisdiction_tax() that city_tax = 0
+# for any disposal-derived gain.
+#
+# A Business Income & Receipts Tax (BIRT) could apply if the taxpayer
+# trades crypto AS a business; that scenario is out of scope for v1.2's
+# retail-investor estimate.
+jurisdiction: philadelphia
+parent_state: pa
+tax_year: 2026
+data_year_actual: 2026
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.phila.gov/departments/department-of-revenue"
+  - "https://dced.pa.gov/local-government/act-32-local-earned-income-tax"
+last_verified: "2026-05-04"
+
+city_type: wage_only
+applies_to_residents_only: false
+no_cap_gains_tax: true
+
+# Earnings tax rates recorded for documentation; computation function
+# does not apply them to passive capital gains.
+resident_earnings_tax_rate: 0.0375
+non_resident_earnings_tax_rate: 0.0344
+
+# Required keys (overlay default — city does not change them).
+capital_gains_treatment: ordinary
+has_ltcg_preference: false
+
+city_note: "Philadelphia earnings tax applies to wages/net business profits only; passive crypto capital gains are excluded (PA local EIT Act 32). BIRT may apply for crypto-trading-as-business but is out of scope for v1.2 retail estimates."
+
+has_schedule_d: false
+loss_carryforward: false
+is_excise_tax: false

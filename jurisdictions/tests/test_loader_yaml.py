@@ -247,6 +247,15 @@ def test_load_yonkers_surcharge():
     )
 
 
+def test_load_philadelphia_no_cap_gains():
+    rs = load_ruleset(2026, state="pa", city="philadelphia")
+    eff = rs.effective
+    assert eff.get("no_cap_gains_tax") is True
+    assert eff["city_type"] == "wage_only"
+    # Philly is layered under PA — PA still flat 3.07% for state tax.
+    assert rs.state_layer["flat_rate"] == 0.0307
+
+
 def test_wa_excise():
     """WA: no broad income tax, but a 7% capital-gains excise over $262k."""
     rs = load_ruleset(2026, state="wa")
