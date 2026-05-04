@@ -25,6 +25,7 @@ classifiers = [
 dependencies = [
     "psycopg2-binary>=2.9",
     "requests>=2.31",
+    "PyYAML>=6.0.1",
 ]
 
 [project.optional-dependencies]
@@ -38,13 +39,21 @@ Homepage = "https://tax.commputer.xyz"
 Source = "https://github.com/TBD/crowtax-engine"
 
 [tool.hatch.build.targets.wheel]
-packages = ["crowtax_engine"]
+packages = ["crowtax_engine", "jurisdictions"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/crowtax_engine", "/tests", "/README.md", "/LICENSE", "/CHANGELOG.md", "/pyproject.toml"]
+include = [
+    "/crowtax_engine",
+    "/jurisdictions",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+    "/pyproject.toml",
+]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "jurisdictions/tests"]
 addopts = "-q"
 
 [tool.ruff]
@@ -62,3 +71,4 @@ ignore = [
 # Tests use intent-named variables (e.g. `loss_lot`) for documentation even
 # when only the side-effect of the make_lot() call matters.
 "tests/*" = ["F841"]
+"jurisdictions/tests/*" = ["F841"]
