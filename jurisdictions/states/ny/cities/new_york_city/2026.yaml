@@ -1,0 +1,44 @@
+# New York City 2026 — NYC Department of Finance.
+# Resident-only income tax at 3.078% - 3.876% on NYC taxable income
+# (= NY state taxable income +/- NYC modifications). Non-residents
+# do not owe NYC personal income tax. No separate LTCG rate.
+# Brackets per NYC DOF Form IT-201 instructions; reflect TY 2025.
+# [2025 — pending 2026 update]
+jurisdiction: nyc
+parent_state: ny
+tax_year: 2026
+data_year_actual: 2025
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.nyc.gov/site/finance/taxes/personal-income-tax.page"
+  - "https://www.tax.ny.gov/forms/income_tax_inst.htm"
+last_verified: "2026-05-04"
+
+city_type: income_tax
+applies_to_residents_only: true
+capital_gains_treatment: ordinary
+has_ltcg_preference: false
+
+brackets:
+  - { filing_status: single, threshold: 0,     rate: 0.03078 }
+  - { filing_status: single, threshold: 12000, rate: 0.03762 }
+  - { filing_status: single, threshold: 25000, rate: 0.03819 }
+  - { filing_status: single, threshold: 50000, rate: 0.03876 }
+  - { filing_status: mfj,    threshold: 0,     rate: 0.03078 }
+  - { filing_status: mfj,    threshold: 21600, rate: 0.03762 }
+  - { filing_status: mfj,    threshold: 45000, rate: 0.03819 }
+  - { filing_status: mfj,    threshold: 90000, rate: 0.03876 }
+  - { filing_status: mfs,    threshold: 0,     rate: 0.03078 }
+  - { filing_status: mfs,    threshold: 12000, rate: 0.03762 }
+  - { filing_status: mfs,    threshold: 25000, rate: 0.03819 }
+  - { filing_status: mfs,    threshold: 50000, rate: 0.03876 }
+  - { filing_status: hoh,    threshold: 0,     rate: 0.03078 }
+  - { filing_status: hoh,    threshold: 14400, rate: 0.03762 }
+  - { filing_status: hoh,    threshold: 30000, rate: 0.03819 }
+  - { filing_status: hoh,    threshold: 60000, rate: 0.03876 }
+
+city_note: "NYC personal income tax applies to NYC residents only. Brackets are layered on top of NY state ordinary brackets via the IT-201 worksheet."
+
+has_schedule_d: false
+loss_carryforward: true
+is_excise_tax: false

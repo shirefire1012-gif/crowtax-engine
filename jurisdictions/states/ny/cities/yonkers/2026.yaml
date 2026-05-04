@@ -1,0 +1,33 @@
+# Yonkers (NY) 2026 — Yonkers residents pay a surcharge equal to
+# 16.75% of NY state tax liability (effectively ~1.82% on income).
+# Non-residents who work in Yonkers pay 0.5% earnings tax on wages
+# only — capital gains are NOT subject to the non-resident earnings
+# tax. For crypto gains, only the resident surcharge applies.
+jurisdiction: yonkers
+parent_state: ny
+tax_year: 2026
+data_year_actual: 2026
+effective_date: "2026-01-01"
+source_urls:
+  - "https://www.tax.ny.gov/forms/income_tax_inst.htm"
+last_verified: "2026-05-04"
+
+city_type: state_tax_surcharge
+applies_to_residents_only: true
+capital_gains_treatment: ordinary
+has_ltcg_preference: false
+
+# Yonkers resident tax = state_tax_liability * surcharge_rate
+surcharge_rate: 0.1675
+surcharge_basis: state_tax_liability
+
+# Non-resident wage earnings tax — recorded for completeness but the
+# computation function ignores this for passive crypto capital gains.
+non_resident_earnings_tax_rate: 0.005
+non_resident_earnings_tax_applies_to_capital_gains: false
+
+city_note: "Yonkers resident surcharge = 16.75% of NY state tax liability. Non-resident 0.5% wage earnings tax does not apply to passive capital gains."
+
+has_schedule_d: false
+loss_carryforward: true
+is_excise_tax: false

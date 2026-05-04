@@ -213,6 +213,40 @@ def test_wy_no_tax():
     assert rs.effective["no_income_tax"] is True
 
 
+def test_load_ny_nyc_compose():
+    """NYC overlays NY state; both layers visible separately."""
+    rs = load_ruleset(2026, state="ny", city="new_york_city")
+    assert rs.state == "ny"
+    assert rs.city == "new_york_city"
+
+    # State NY brackets remain visible in the per-layer dict.
+    assert isinstance(rs.state_layer["brackets"], list)
+    assert any(
+        b["filing_status"] == "single" and b["rate"] == pytest.approx(0.04)
+        for b in rs.state_layer["brackets"]
+    )
+
+    # City brackets *replace* state brackets in the merged effective.
+    eff = rs.effective
+    assert eff["city_type"] == "income_tax"
+    assert eff["applies_to_residents_only"] is True
+    assert any(
+        round(b["rate"], 5) == 0.03078
+        for b in eff["brackets"]
+    ), "expected NYC 3.078% bracket in merged effective"
+
+
+def test_load_yonkers_surcharge():
+    rs = load_ruleset(2026, state="ny", city="yonkers")
+    eff = rs.effective
+    assert eff["city_type"] == "state_tax_surcharge"
+    assert eff["surcharge_rate"] == pytest.approx(0.1675)
+    assert eff["surcharge_basis"] == "state_tax_liability"
+    assert (
+        eff["non_resident_earnings_tax_applies_to_capital_gains"] is False
+    )
+
+
 def test_wa_excise():
     """WA: no broad income tax, but a 7% capital-gains excise over $262k."""
     rs = load_ruleset(2026, state="wa")
