@@ -127,7 +127,8 @@ def test_source_files_recorded_for_federal():
 # verify the smoke test parametrizes cleanly across whatever ships.
 V12_STATES_INCOME_TAX = ["ca", "ny", "nj", "il", "ma", "pa", "ga", "nc"]
 V12_STATES_NO_TAX = ["tx", "fl", "ak", "nv", "nh", "sd", "tn", "wy"]
-V12_STATES_ALL = V12_STATES_INCOME_TAX + V12_STATES_NO_TAX
+V12_STATES_EXCISE = ["wa"]
+V12_STATES_ALL = V12_STATES_INCOME_TAX + V12_STATES_NO_TAX + V12_STATES_EXCISE
 
 
 @pytest.mark.parametrize("state_code", V12_STATES_ALL)
@@ -210,3 +211,18 @@ def test_nc_static_date_2024():
 def test_wy_no_tax():
     rs = load_ruleset(2026, state="wy")
     assert rs.effective["no_income_tax"] is True
+
+
+def test_wa_excise():
+    """WA: no broad income tax, but a 7% capital-gains excise over $262k."""
+    rs = load_ruleset(2026, state="wa")
+    eff = rs.effective
+    assert eff["is_excise_tax"] is True
+    assert eff["no_income_tax"] is True
+    assert eff["capital_gains_treatment"] == "excise"
+    excise = eff["capital_gains_excise"]
+    assert excise["rate"] == pytest.approx(0.07)
+    assert excise["threshold"] == 262_000
+    assert excise["applies_to"] == "long_term_only"
+    assert excise["domicile_based"] is True
+    assert excise["charitable_deduction_cap"] == 100_000
