@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.3 — 2026-05-06
+
+### Added
+
+- `crowtax_engine.transfer_pairs` module exposes `ExclusionSet` (a frozen
+  dataclass holding the out-leg and in-leg event ids of confirmed
+  internal transfers) and `is_excluded_event(event_id, exclusions)` —
+  the predicate engine consumers use to skip events that are one half
+  of a non-taxable transfer between the user's own accounts.
+- `staging.promote_confirmed(conn, *, exclusions=None)` honors the
+  exclusion set: rows whose `raw_json["source_tx_id"]` appears in
+  either leg of the set get advanced to `status='promoted'` without
+  producing any `tax_lots` or `tax_disposals`. Engine consumers that
+  don't go through CrowTax's translate-layer filter can supply this
+  directly; CrowTax filters at the translate-to-staging boundary so
+  it can pass `None` (default) and rely on its own filtering.
+
+### Compatibility
+
+- `promote_confirmed` keeps the `(conn, batch_size)` positional contract;
+  `exclusions` is keyword-only with a `None` default. No existing call
+  sites need to change.
+
 ## 0.1.0 — 2026-04-25
 
 Initial extraction from The Crow Show platform.

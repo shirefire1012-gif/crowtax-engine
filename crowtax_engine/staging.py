@@ -7,6 +7,7 @@ from decimal import Decimal
 import psycopg2.extras
 
 from crowtax_engine.accounts import get_or_create_account
+from crowtax_engine.transfer_pairs import ExclusionSet, is_excluded_event
 
 log = logging.getLogger(__name__)
 
@@ -143,7 +144,12 @@ def _parse_acquisition_type(raw_json: dict) -> str:
 PROMOTE_BATCH_SIZE = 500
 
 
-def promote_confirmed(conn, batch_size: int = PROMOTE_BATCH_SIZE):
+def promote_confirmed(
+    conn,
+    batch_size: int = PROMOTE_BATCH_SIZE,
+    *,
+    exclusions: ExclusionSet | None = None,
+):
     """Parse confirmed raw transactions into tax_lots and tax_disposals.
 
     Processes rows in batches of ``batch_size`` (default 500), committing
@@ -151,6 +157,14 @@ def promote_confirmed(conn, batch_size: int = PROMOTE_BATCH_SIZE):
     as part of its promotion, successive fetches naturally exclude
     already-processed rows — the outer loop terminates as soon as the
     ``WHERE status='confirmed'`` query returns zero rows.
+
+    ``exclusions`` is the optional internal-transfer skip-list. Rows
+    whose ``raw_json["source_tx_id"]`` appears in either leg of the
+    set are advanced to ``status='promoted'`` without producing tax
+    lots or disposals — they're treated as one half of a non-taxable
+    internal transfer. Engine consumers that don't go through CrowTax's
+    translate layer can supply this directly; CrowTax filters at the
+    translate-to-staging boundary so it can pass ``None``.
     """
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     try:
@@ -173,6 +187,18 @@ def promote_confirmed(conn, batch_size: int = PROMOTE_BATCH_SIZE):
             for row in rows:
                 raw = row["raw_json"] if isinstance(row["raw_json"], dict) else json.loads(row["raw_json"])
                 raw_id = row["id"]
+                if exclusions is not None:
+                    src_tx_id = raw.get("source_tx_id")
+                    if src_tx_id and is_excluded_event(src_tx_id, exclusions):
+                        # Mark as promoted so we don't loop forever, but skip
+                        # creating any lot / disposal — this leg is one half
+                        # of a non-taxable internal transfer.
+                        cur.execute(
+                            "UPDATE tax_raw_transactions SET status = 'promoted' "
+                            "WHERE id = %s",
+                            (raw_id,),
+                        )
+                        continue
                 chain = row["chain"] or raw.get("chain", "")
                 ts = row["timestamp"]
                 source_tx_id = raw.get("source_tx_id")
