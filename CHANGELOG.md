@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.4 — 2026-05-06
+
+### Features
+
+- `crowtax_engine.simple.estimate()` — pure-function tax estimator
+  for the public no-auth `/simple` page. Takes 5 inputs (year,
+  filing status, state, proceeds, basis) plus an optional AGI;
+  returns federal + state + city breakdown.
+- Holding-period split: `"short"` / `"long"` / `"mixed"` with
+  user-adjustable percent (default 50/50).
+- Top-bracket fallback (37%) when AGI is omitted; flagged in the
+  result for UI disclosure.
+- Unsupported state (no YAML) returns federal-only with
+  `state_supported=False` instead of raising.
+- Reuses existing `compute_jurisdiction_tax` machinery — same
+  brackets, NIIT, WA excise, NYC city layering, etc.
+
 ## 0.4.3 — 2026-05-06
 
 ### Added
