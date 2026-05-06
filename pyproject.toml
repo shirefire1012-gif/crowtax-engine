@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "crowtax-engine"
-version = "0.1.0"
+version = "0.4.4"
 description = "Privacy-first crypto tax engine: per-wallet basis matching, wash-sale detection, Form 8949 / Schedule D / Schedule 1 output. Self-contained library, no SaaS dependencies."
 readme = "README.md"
 license = {text = "MIT"}
